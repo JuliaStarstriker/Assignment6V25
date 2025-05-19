@@ -34,7 +34,7 @@ namespace Assigment6
             taskManager = new TaskManager();
 
             // Clear the ListBox
-            lstTask.Items.Clear();
+            lstEconomy.Items.Clear();
 
             // clear the category box
             cmbType.Items.Clear();
@@ -54,11 +54,11 @@ namespace Assigment6
         /// </summary>
         private void UpdateGUI()
         {
-            lstTask.Items.Clear();
+            lstEconomy.Items.Clear();
             string[] infoStrings = taskManager.GetInfoStringsList();
             if (infoStrings != null)
             {
-                lstTask.Items.AddRange(infoStrings);
+                lstEconomy.Items.AddRange(infoStrings);
             }
         }
 
@@ -69,7 +69,9 @@ namespace Assigment6
         /// <returns>ReadInputTask</returns>
         private Task ReadInput()
         {
-            Task ReadInputTask = new Task();
+            //Task ReadInputTask = new Task();
+
+
 
             if (dateTimePicker.Value == DateTimePicker.MinimumDateTime)
             {
@@ -77,29 +79,49 @@ namespace Assigment6
                 return null;
             }
 
-            ReadInputTask.DateAndTime = dateTimePicker.Value;
+            //ReadInputTask.DateAndTime = dateTimePicker.Value;
 
-            if (Enum.TryParse(cmbType.Text, out CategoryType category))
+            //if (Enum.TryParse(cmbType.Text, out CategoryType category))
+            //{
+            //    ReadInputTask.Category = category;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Pleas provide category type", "Error");
+            //    return null;
+            //}
+
+
+            // 1) read the Name
+            string name = txtName.Text?.Trim() ?? "";
+            if (string.IsNullOrWhiteSpace(name))
             {
-                ReadInputTask.Category = category;
-            }
-            else
-            {
-                MessageBox.Show("Pleas provide category type", "Error");
+                MessageBox.Show("Name cannot be empty.");
                 return null;
             }
 
+            // 2) read/parse the Type
+            if (!Enum.TryParse(cmbType.Text, out CategoryType type))
+            {
+                MessageBox.Show("Please select a valid category type.");
+                return null;
+            }
+
+            // 3) read Description as before
             if (string.IsNullOrWhiteSpace(txtToDo.Text))
             {
                 MessageBox.Show("Description cannot be empty.");
                 return null;
             }
-            else
-            {
-                ReadInputTask.Description = txtToDo.Text;
-            }
+            string desc = txtToDo.Text.Trim();
 
-            return ReadInputTask;
+            // 4) build your Category record
+            var category = new Category(name, type);
+            // 5) construct the Task using the new ctor
+
+            return new Task(dateTimePicker.Value, category, desc);
+
+            //return ReadInputTask;
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -162,7 +184,7 @@ namespace Assigment6
             }
         }
 
-        private void lstTask_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstEconomy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

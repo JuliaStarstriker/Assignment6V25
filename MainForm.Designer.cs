@@ -35,11 +35,12 @@
             label3 = new Label();
             txtToDo = new TextBox();
             groupBox1 = new GroupBox();
+            label9 = new Label();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
-            lstTask = new ListBox();
+            lstEconomy = new ListBox();
             fileToolStripMenuItem = new ToolStripMenuItem();
             newCtrlNToolStripMenuItem = new ToolStripMenuItem();
             menuFileOpen = new ToolStripMenuItem();
@@ -48,8 +49,10 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             menuMain = new MenuStrip();
             AddTask = new Button();
-            textBox1 = new TextBox();
+            txtName = new TextBox();
             label8 = new Label();
+            label10 = new Label();
+            textBox1 = new TextBox();
             groupBox1.SuspendLayout();
             menuMain.SuspendLayout();
             SuspendLayout();
@@ -58,7 +61,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(40, 72);
+            label1.Location = new Point(40, 86);
             label1.Name = "label1";
             label1.Size = new Size(90, 17);
             label1.TabIndex = 0;
@@ -69,7 +72,7 @@
             dateTimePicker.CalendarFont = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dateTimePicker.CustomFormat = "dddd, dd MMMM yyyy HH:mm";
             dateTimePicker.Format = DateTimePickerFormat.Custom;
-            dateTimePicker.Location = new Point(173, 72);
+            dateTimePicker.Location = new Point(173, 86);
             dateTimePicker.Name = "dateTimePicker";
             dateTimePicker.Size = new Size(273, 23);
             dateTimePicker.TabIndex = 1;
@@ -79,7 +82,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(465, 72);
+            label2.Location = new Point(465, 86);
             label2.Name = "label2";
             label2.Size = new Size(35, 17);
             label2.TabIndex = 2;
@@ -88,7 +91,7 @@
             // cmbType
             // 
             cmbType.FormattingEnabled = true;
-            cmbType.Location = new Point(531, 72);
+            cmbType.Location = new Point(531, 86);
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(121, 23);
             cmbType.TabIndex = 3;
@@ -97,11 +100,11 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(63, 176);
+            label3.Location = new Point(8, 176);
             label3.Name = "label3";
-            label3.Size = new Size(72, 17);
+            label3.Size = new Size(141, 17);
             label3.TabIndex = 4;
-            label3.Text = "transaction";
+            label3.Text = "transaction description";
             label3.Click += label3_Click;
             // 
             // txtToDo
@@ -113,11 +116,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(lstTask);
+            groupBox1.Controls.Add(lstEconomy);
             groupBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.ForestGreen;
             groupBox1.Location = new Point(40, 251);
@@ -127,12 +131,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Economy";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.Black;
+            label9.Location = new Point(209, 35);
+            label9.Name = "label9";
+            label9.Size = new Size(40, 15);
+            label9.TabIndex = 12;
+            label9.Text = "Name";
+            // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(266, 35);
+            label7.Location = new Point(311, 35);
             label7.Name = "label7";
             label7.Size = new Size(71, 15);
             label7.TabIndex = 11;
@@ -143,18 +158,18 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(201, 35);
+            label6.Location = new Point(246, 35);
             label6.Name = "label6";
-            label6.Size = new Size(48, 15);
+            label6.Size = new Size(41, 15);
             label6.TabIndex = 10;
-            label6.Text = "Priority";
+            label6.Text = "(Type)";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(160, 35);
+            label5.Location = new Point(150, 35);
             label5.Name = "label5";
             label5.Size = new Size(35, 15);
             label5.TabIndex = 9;
@@ -165,22 +180,22 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(37, 35);
+            label4.Location = new Point(23, 35);
             label4.Name = "label4";
             label4.Size = new Size(34, 15);
             label4.TabIndex = 8;
             label4.Text = "Date";
             // 
-            // lstTask
+            // lstEconomy
             // 
-            lstTask.Font = new Font("Segoe UI Semilight", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lstTask.FormattingEnabled = true;
-            lstTask.ItemHeight = 13;
-            lstTask.Location = new Point(23, 53);
-            lstTask.Name = "lstTask";
-            lstTask.Size = new Size(643, 134);
-            lstTask.TabIndex = 0;
-            lstTask.SelectedIndexChanged += lstTask_SelectedIndexChanged;
+            lstEconomy.Font = new Font("Segoe UI Semilight", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lstEconomy.FormattingEnabled = true;
+            lstEconomy.ItemHeight = 13;
+            lstEconomy.Location = new Point(23, 53);
+            lstEconomy.Name = "lstEconomy";
+            lstEconomy.Size = new Size(643, 134);
+            lstEconomy.TabIndex = 0;
+            lstEconomy.SelectedIndexChanged += lstEconomy_SelectedIndexChanged;
             // 
             // fileToolStripMenuItem
             // 
@@ -245,22 +260,39 @@
             AddTask.UseVisualStyleBackColor = false;
             AddTask.Click += AddTask_Click;
             // 
-            // textBox1
+            // txtName
             // 
-            textBox1.Location = new Point(173, 134);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(223, 23);
-            textBox1.TabIndex = 11;
+            txtName.Location = new Point(173, 134);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(223, 23);
+            txtName.TabIndex = 11;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(8, 135);
+            label8.Location = new Point(22, 134);
             label8.Name = "label8";
             label8.Size = new Size(127, 17);
             label8.TabIndex = 10;
             label8.Text = "Name of transaction";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(431, 134);
+            label10.Name = "label10";
+            label10.Size = new Size(53, 17);
+            label10.TabIndex = 12;
+            label10.Text = "Amount";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(489, 134);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(215, 23);
+            textBox1.TabIndex = 13;
             // 
             // MainForm
             // 
@@ -269,6 +301,8 @@
             BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1163, 612);
             Controls.Add(textBox1);
+            Controls.Add(label10);
+            Controls.Add(txtName);
             Controls.Add(label8);
             Controls.Add(AddTask);
             Controls.Add(groupBox1);
@@ -299,7 +333,7 @@
         private Label label3;
         private TextBox txtToDo;
         private GroupBox groupBox1;
-        private ListBox lstTask;
+        private ListBox lstEconomy;
         private Label label5;
         private Label label4;
         private Label label7;
@@ -312,7 +346,10 @@
         private ToolStripMenuItem menuFileSave;
         private ToolStripMenuItem menuFileOpen;
         private Button AddTask;
-        private TextBox textBox1;
+        private TextBox txtName;
         private Label label8;
+        private Label label9;
+        private Label label10;
+        private TextBox textBox1;
     }
 }

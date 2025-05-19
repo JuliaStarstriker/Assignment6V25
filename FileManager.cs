@@ -42,58 +42,47 @@ namespace Assigment6
 
         public bool ReadTaskListFrFile(List<Task> taskList, string fileName)
         {
-
-            if (File.Exists(fileName))
-            {
-                // Read the file content
-                string[] lines = File.ReadAllLines(fileName);
-
-                // Clear the current task list to avoid duplications
-                taskList.Clear();
-                CategoryType category;
-
-                // Process each line and create Task objects
-                foreach (string line in lines)
-                {
-                    //Read date and time
-                    //Format it to fit the task
-                    string datePart = line.Substring(0, 25).Trim();
-                    string dateTimestr1 = line.Substring(25, 11).Trim();
-                    string format = "dddd, d MMMM yyyy HH:mm";
-                    DateTime dateTime = new DateTime(2025, 1, 1);
-                    //MessageBox.Show(datePart + " " + dateTimestr1);
-                    //dateTime = DateTime.TryParseExact(datePart + " " + dateTimestr1, format, CultureInfo.InvariantCulture);
-                    //bool successDatetime = DateTime.TryParse(datePart + " " + dateTimestr1, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
-                    bool successDatetime = DateTime.TryParse(datePart + " " + dateTimestr1, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateTime);
-                    
-
-                    //Read category
-                    //Parse the string "categorystr" into an enumeration value of type "category"
-                    string categorystr = line.Substring(37, 16).Trim();
-                    
-                    //MessageBox.Show("Prio:" + categorystr + ".");
-                    bool success = Enum.TryParse(categorystr, out category);
-                    string description = line.Substring(51).Trim();
-
-                    if (successDatetime && success)
-                    {
-                        //MessageBox.Show("Parsed Date: " + dateTime);
-                        //Add values to task and add task to list
-                        Task task = new Task(dateTime, description, category);
-                        taskList.Add(task);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid date format.");
-                    }
-
-                    
-                }
-                return true;
-            }
-            else
+            if (!File.Exists(fileName))
                 return false;
-        }
 
+            string[] lines = File.ReadAllLines(fileName);
+            taskList.Clear();
+
+            foreach (string line in lines)
+            {
+                // Split by comma (but support description containing commas)
+                string[] parts = line.Split(',');
+
+                if (parts.Length < 4)
+                {
+                    MessageBox.Show("Invalid line format.");
+                    continue;
+                }
+
+                // Try parse date
+                if (!DateTime.TryParse(parts[0], out DateTime dateTime))
+                {
+                    MessageBox.Show("Invalid date format.");
+                    continue;
+                }
+
+                string name = parts[1];
+
+                if (!Enum.TryParse(parts[2], out CategoryType category))
+                {
+                    MessageBox.Show("Invalid category.");
+                    continue;
+                }
+
+                // Combine rest as description (in case it has commas)
+                string description = string.Join(",", parts.Skip(3));
+
+                // Create and add Task
+                //Task task = new Task(dateTime, name, description, category);
+                //taskList.Add(task);
+            }
+
+            return true;
+        }
     }
 }

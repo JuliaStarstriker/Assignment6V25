@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Assigment6.MainForm;
 
 namespace Assigment6
 {
@@ -10,7 +11,7 @@ namespace Assigment6
     {
         private DateTime date;
         private string description;
-        private CategoryType category;
+        private Category category;
 
 
         /// <summary>
@@ -38,9 +39,9 @@ namespace Assigment6
         /// <summary>
         /// Get and Set property for category
         /// </summary>
-        public CategoryType Category
+        public Category Category
         {
-            get { return category; } 
+            get { return category; }
             set { category = value; }
         }
 
@@ -57,9 +58,14 @@ namespace Assigment6
         /// returns the time portion of the 'date' field in a short time format
         /// </summary>
         /// <returns>date.ToShortTimeString();</returns>
+        //private string GetTimeString()
+        //{
+        //    return date.ToShortTimeString();
+        //}
+
         private string GetTimeString()
         {
-            return date.ToShortTimeString();
+            return $"{date:HH:mm}          ";
         }
 
         /// <summary>
@@ -68,16 +74,18 @@ namespace Assigment6
         /// <returns>category.ToString();</returns>
         private string GetPriorityString()
         {
-            return category.ToString();
+            //return category.ToString();
+            return $"{category.Name} ({category.Type})";
         }
 
         /// <summary>
         /// This constructor initializes a new Task object with the default category set to "Normal"
         /// </summary>
-        public Task()
+        public Task(DateTime taskDate, Category category, string description)
         {
-            //set a default category typ
-            category = CategoryType.Revenue;
+            this.date = taskDate;
+            this.category = category;
+            this.description = description;
         }
 
         /// <summary>
@@ -85,23 +93,8 @@ namespace Assigment6
         /// an empty string for the description, and a default category of "Normal"
         /// </summary>
         /// <param name="taskDate"></param>
-        public Task(DateTime taskDate) : this(taskDate, string.Empty, CategoryType.Revenue)
+        public Task(DateTime taskDate) : this(taskDate, new Category("Default", CategoryType.Revenue), string.Empty)
         {
-
-        }
-
-        /// <summary>
-        /// Constructor that initializes a Task object with a specified task date, description, and category
-        /// This constructor allows full customization of a Task's properties when creating a new instance
-        /// </summary>
-        /// <param name="taskDate"></param>
-        /// <param name="description"></param>
-        /// <param name="category"></param>
-        public Task(DateTime taskDate, string description, CategoryType category)
-        {
-            this.date = taskDate;
-            this.description = description; 
-            this.category = category;
         }
 
         /// <summary>
@@ -111,11 +104,11 @@ namespace Assigment6
         /// <returns>string TextOut</returns>
         public override string ToString()
         {
-            string TextOut = string.Format("{0, -25} {1, 10} {2, -16} {3, -20}",
+            string TextOut = string.Format("{0, -20} {1, 20} {2, -20} {3, -20}",
                                             date.ToLongDateString(),
                                             GetTimeString(),
                                             GetPriorityString(),
-                                            Description );
+                                            Description);
             return TextOut;
         }
         
