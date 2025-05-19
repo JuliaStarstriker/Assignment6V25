@@ -1,12 +1,21 @@
 namespace Assigment6
 {
+    public record Category(string Name, CategoryType Type);
+
+    public record Transaction(
+        DateTime Date,
+        decimal Amount,
+        Category Category,
+        string Description
+    );
+
     public partial class MainForm : Form
     {
         private TaskManager taskManager;
 
         string fileName = Application.StartupPath + "\\Task.txt";
 
-        public record Category(string Name, CategoryType Type);
+       
 
         public MainForm()
         {
@@ -33,25 +42,20 @@ namespace Assigment6
         {
             taskManager = new TaskManager();
 
-            // Clear the ListBox
             lstEconomy.Items.Clear();
 
-            // clear the category box
             cmbType.Items.Clear();
 
-            // Fill the ComboBox
             cmbType.Items.AddRange(Enum.GetNames(typeof(CategoryType)));
 
-            //set Standard Value to ComboBox
+
             cmbType.SelectedIndex = (int)CategoryType.Revenue;
 
-            //make sure listbox is empty
             txtToDo.Text = string.Empty;
+
+            txtAmount.Text = string.Empty;
         }
 
-        /// <summary>
-        /// pdates the graphical user interface (GUI) with the latest task information
-        /// </summary>
         private void UpdateGUI()
         {
             lstEconomy.Items.Clear();
@@ -62,16 +66,13 @@ namespace Assigment6
             }
         }
 
-
-        /// <summary>
-        /// Read Input from user (Date and time, category, description)
-        /// </summary>
-        /// <returns>ReadInputTask</returns>
-        private Task ReadInput()
+        private Transaction ReadInput()
         {
-            //Task ReadInputTask = new Task();
-
-
+            if (!decimal.TryParse(txtAmount.Text.Trim(), out decimal amount) || amount < 0)
+            {
+                MessageBox.Show("Please enter a valid (non-negative) amount.");
+                return null;
+            }
 
             if (dateTimePicker.Value == DateTimePicker.MinimumDateTime)
             {
@@ -79,20 +80,6 @@ namespace Assigment6
                 return null;
             }
 
-            //ReadInputTask.DateAndTime = dateTimePicker.Value;
-
-            //if (Enum.TryParse(cmbType.Text, out CategoryType category))
-            //{
-            //    ReadInputTask.Category = category;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Pleas provide category type", "Error");
-            //    return null;
-            //}
-
-
-            // 1) read the Name
             string name = txtName.Text?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -100,14 +87,12 @@ namespace Assigment6
                 return null;
             }
 
-            // 2) read/parse the Type
             if (!Enum.TryParse(cmbType.Text, out CategoryType type))
             {
                 MessageBox.Show("Please select a valid category type.");
                 return null;
             }
 
-            // 3) read Description as before
             if (string.IsNullOrWhiteSpace(txtToDo.Text))
             {
                 MessageBox.Show("Description cannot be empty.");
@@ -115,13 +100,9 @@ namespace Assigment6
             }
             string desc = txtToDo.Text.Trim();
 
-            // 4) build your Category record
             var category = new Category(name, type);
-            // 5) construct the Task using the new ctor
 
-            return new Task(dateTimePicker.Value, category, desc);
-
-            //return ReadInputTask;
+            return new Transaction(dateTimePicker.Value, (decimal)amount, category, desc);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -131,7 +112,6 @@ namespace Assigment6
 
         private void menuFileExit_Click(object sender, EventArgs e)
         {
-            //displays a confirmation message box when the user attempts to exit the program
             DialogResult dlgResult = MessageBox.Show("Do you really want to exit my program? hope to se you again if you want to",
                 "Think twice", MessageBoxButtons.OKCancel);
             if (dlgResult == DialogResult.OK)
@@ -142,7 +122,6 @@ namespace Assigment6
 
         private void menuFileSave_Click(object sender, EventArgs e)
         {
-            //attempts to save the task data to a file and displays a message box based on the result
             string errMessage = "Something went wrong while saving data to file";
 
             bool ok = taskManager.WriteDataToFile(fileName);
@@ -154,7 +133,6 @@ namespace Assigment6
 
         private void menuFileOpen_Click(object sender, EventArgs e)
         {
-            //attempts to read data from a file and updates the GUI based on the result
             string errMessage = "Something went wrong while opening data to file";
 
             bool ok = taskManager.ReadDataFromFile(fileName);
@@ -177,8 +155,8 @@ namespace Assigment6
 
         private void AddTask_Click(object sender, EventArgs e)
         {
-            Task task = ReadInput();
-            if (taskManager.AddNewTask(task))
+            Transaction transaction = ReadInput();
+            if (transaction != null && taskManager.AddNewTransaction(transaction))
             {
                 UpdateGUI();
             }

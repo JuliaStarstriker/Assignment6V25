@@ -10,7 +10,5 @@ namespace Assigment6
     {
         Expense,
         Revenue
-    }
-
-    
+    }  
 }

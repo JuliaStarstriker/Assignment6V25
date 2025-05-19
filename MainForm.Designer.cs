@@ -52,7 +52,8 @@
             txtName = new TextBox();
             label8 = new Label();
             label10 = new Label();
-            textBox1 = new TextBox();
+            txtAmount = new TextBox();
+            label11 = new Label();
             groupBox1.SuspendLayout();
             menuMain.SuspendLayout();
             SuspendLayout();
@@ -116,6 +117,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
@@ -287,12 +289,23 @@
             label10.TabIndex = 12;
             label10.Text = "Amount";
             // 
-            // textBox1
+            // txtAmount
             // 
-            textBox1.Location = new Point(489, 134);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(215, 23);
-            textBox1.TabIndex = 13;
+            txtAmount.Location = new Point(489, 134);
+            txtAmount.Name = "txtAmount";
+            txtAmount.Size = new Size(215, 23);
+            txtAmount.TabIndex = 13;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.Black;
+            label11.Location = new Point(480, 35);
+            label11.Name = "label11";
+            label11.Size = new Size(52, 15);
+            label11.TabIndex = 13;
+            label11.Text = "Amount";
             // 
             // MainForm
             // 
@@ -300,7 +313,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1163, 612);
-            Controls.Add(textBox1);
+            Controls.Add(txtAmount);
             Controls.Add(label10);
             Controls.Add(txtName);
             Controls.Add(label8);
@@ -350,6 +363,7 @@
         private Label label8;
         private Label label9;
         private Label label10;
-        private TextBox textBox1;
+        private TextBox txtAmount;
+        private Label label11;
     }
 }
