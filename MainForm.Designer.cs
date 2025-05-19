@@ -190,28 +190,28 @@
             // newCtrlNToolStripMenuItem
             // 
             newCtrlNToolStripMenuItem.Name = "newCtrlNToolStripMenuItem";
-            newCtrlNToolStripMenuItem.Size = new Size(148, 22);
+            newCtrlNToolStripMenuItem.Size = new Size(180, 22);
             newCtrlNToolStripMenuItem.Text = "New  Ctrl+N";
             newCtrlNToolStripMenuItem.Click += newCtrlNToolStripMenuItem_Click;
             // 
             // menuFileOpen
             // 
             menuFileOpen.Name = "menuFileOpen";
-            menuFileOpen.Size = new Size(148, 22);
+            menuFileOpen.Size = new Size(180, 22);
             menuFileOpen.Text = "Open data file";
             menuFileOpen.Click += menuFileOpen_Click;
             // 
             // menuFileSave
             // 
             menuFileSave.Name = "menuFileSave";
-            menuFileSave.Size = new Size(148, 22);
+            menuFileSave.Size = new Size(180, 22);
             menuFileSave.Text = "Save datafile";
             menuFileSave.Click += menuFileSave_Click;
             // 
             // menuFileExit
             // 
             menuFileExit.Name = "menuFileExit";
-            menuFileExit.Size = new Size(148, 22);
+            menuFileExit.Size = new Size(180, 22);
             menuFileExit.Text = "Exit";
             menuFileExit.Click += menuFileExit_Click;
             // 
@@ -260,7 +260,7 @@
             Controls.Add(menuMain);
             MainMenuStrip = menuMain;
             Name = "MainForm";
-            Text = "ToDo Reminder";
+            Text = "Economy calculator";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             menuMain.ResumeLayout(false);
