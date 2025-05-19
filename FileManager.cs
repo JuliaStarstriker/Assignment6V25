@@ -50,7 +50,7 @@ namespace Assigment6
 
                 // Clear the current task list to avoid duplications
                 taskList.Clear();
-                PriorityType priority;
+                CategoryType category;
 
                 // Process each line and create Task objects
                 foreach (string line in lines)
@@ -67,19 +67,19 @@ namespace Assigment6
                     bool successDatetime = DateTime.TryParse(datePart + " " + dateTimestr1, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateTime);
                     
 
-                    //Read priority
-                    //Parse the string "prioritystr" into an enumeration value of type "priority"
-                    string prioritystr = line.Substring(37, 16).Trim();
+                    //Read category
+                    //Parse the string "categorystr" into an enumeration value of type "category"
+                    string categorystr = line.Substring(37, 16).Trim();
                     
-                    //MessageBox.Show("Prio:" + prioritystr + ".");
-                    bool success = Enum.TryParse(prioritystr, out priority);
+                    //MessageBox.Show("Prio:" + categorystr + ".");
+                    bool success = Enum.TryParse(categorystr, out category);
                     string description = line.Substring(51).Trim();
 
                     if (successDatetime && success)
                     {
                         //MessageBox.Show("Parsed Date: " + dateTime);
                         //Add values to task and add task to list
-                        Task task = new Task(dateTime, description, priority);
+                        Task task = new Task(dateTime, description, category);
                         taskList.Add(task);
                     }
                     else

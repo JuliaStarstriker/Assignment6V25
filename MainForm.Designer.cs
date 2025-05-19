@@ -31,7 +31,7 @@
             label1 = new Label();
             dateTimePicker = new DateTimePicker();
             label2 = new Label();
-            cmbPriority = new ComboBox();
+            cmbType = new ComboBox();
             label3 = new Label();
             txtToDo = new TextBox();
             groupBox1 = new GroupBox();
@@ -48,6 +48,8 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             menuMain = new MenuStrip();
             AddTask = new Button();
+            textBox1 = new TextBox();
+            label8 = new Label();
             groupBox1.SuspendLayout();
             menuMain.SuspendLayout();
             SuspendLayout();
@@ -79,32 +81,32 @@
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(465, 72);
             label2.Name = "label2";
-            label2.Size = new Size(49, 17);
+            label2.Size = new Size(35, 17);
             label2.TabIndex = 2;
-            label2.Text = "Priority";
+            label2.Text = "Type";
             // 
-            // cmbPriority
+            // cmbType
             // 
-            cmbPriority.FormattingEnabled = true;
-            cmbPriority.Location = new Point(531, 72);
-            cmbPriority.Name = "cmbPriority";
-            cmbPriority.Size = new Size(121, 23);
-            cmbPriority.TabIndex = 3;
+            cmbType.FormattingEnabled = true;
+            cmbType.Location = new Point(531, 72);
+            cmbType.Name = "cmbType";
+            cmbType.Size = new Size(121, 23);
+            cmbType.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(40, 115);
+            label3.Location = new Point(63, 176);
             label3.Name = "label3";
-            label3.Size = new Size(62, 17);
+            label3.Size = new Size(72, 17);
             label3.TabIndex = 4;
-            label3.Text = "Expenses";
+            label3.Text = "transaction";
             label3.Click += label3_Click;
             // 
             // txtToDo
             // 
-            txtToDo.Location = new Point(145, 115);
+            txtToDo.Location = new Point(173, 176);
             txtToDo.Name = "txtToDo";
             txtToDo.Size = new Size(531, 23);
             txtToDo.TabIndex = 5;
@@ -118,7 +120,7 @@
             groupBox1.Controls.Add(lstTask);
             groupBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.ForestGreen;
-            groupBox1.Location = new Point(50, 262);
+            groupBox1.Location = new Point(40, 251);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(672, 222);
             groupBox1.TabIndex = 7;
@@ -190,28 +192,28 @@
             // newCtrlNToolStripMenuItem
             // 
             newCtrlNToolStripMenuItem.Name = "newCtrlNToolStripMenuItem";
-            newCtrlNToolStripMenuItem.Size = new Size(180, 22);
+            newCtrlNToolStripMenuItem.Size = new Size(148, 22);
             newCtrlNToolStripMenuItem.Text = "New  Ctrl+N";
             newCtrlNToolStripMenuItem.Click += newCtrlNToolStripMenuItem_Click;
             // 
             // menuFileOpen
             // 
             menuFileOpen.Name = "menuFileOpen";
-            menuFileOpen.Size = new Size(180, 22);
+            menuFileOpen.Size = new Size(148, 22);
             menuFileOpen.Text = "Open data file";
             menuFileOpen.Click += menuFileOpen_Click;
             // 
             // menuFileSave
             // 
             menuFileSave.Name = "menuFileSave";
-            menuFileSave.Size = new Size(180, 22);
+            menuFileSave.Size = new Size(148, 22);
             menuFileSave.Text = "Save datafile";
             menuFileSave.Click += menuFileSave_Click;
             // 
             // menuFileExit
             // 
             menuFileExit.Name = "menuFileExit";
-            menuFileExit.Size = new Size(180, 22);
+            menuFileExit.Size = new Size(148, 22);
             menuFileExit.Text = "Exit";
             menuFileExit.Click += menuFileExit_Click;
             // 
@@ -235,7 +237,7 @@
             // AddTask
             // 
             AddTask.BackColor = Color.LightGreen;
-            AddTask.Location = new Point(336, 163);
+            AddTask.Location = new Point(329, 222);
             AddTask.Name = "AddTask";
             AddTask.Size = new Size(75, 23);
             AddTask.TabIndex = 9;
@@ -243,17 +245,36 @@
             AddTask.UseVisualStyleBackColor = false;
             AddTask.Click += AddTask_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(173, 134);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(223, 23);
+            textBox1.TabIndex = 11;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(8, 135);
+            label8.Name = "label8";
+            label8.Size = new Size(127, 17);
+            label8.TabIndex = 10;
+            label8.Text = "Name of transaction";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1163, 612);
+            Controls.Add(textBox1);
+            Controls.Add(label8);
             Controls.Add(AddTask);
             Controls.Add(groupBox1);
             Controls.Add(txtToDo);
             Controls.Add(label3);
-            Controls.Add(cmbPriority);
+            Controls.Add(cmbType);
             Controls.Add(label2);
             Controls.Add(dateTimePicker);
             Controls.Add(label1);
@@ -274,7 +295,7 @@
         private Label label1;
         private DateTimePicker dateTimePicker;
         private Label label2;
-        private ComboBox cmbPriority;
+        private ComboBox cmbType;
         private Label label3;
         private TextBox txtToDo;
         private GroupBox groupBox1;
@@ -291,5 +312,7 @@
         private ToolStripMenuItem menuFileSave;
         private ToolStripMenuItem menuFileOpen;
         private Button AddTask;
+        private TextBox textBox1;
+        private Label label8;
     }
 }

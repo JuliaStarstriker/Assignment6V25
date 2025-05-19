@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assigment6
 {
-    public enum PriorityType
+    public enum CategoryType
     {
-        Very_important ,
-        Important,
-        Normal,
-        Less_important,
-        Not_important
+        Expense,
+        Revenue
     }
+
+    
 }

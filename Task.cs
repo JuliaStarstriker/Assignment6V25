@@ -10,7 +10,7 @@ namespace Assigment6
     {
         private DateTime date;
         private string description;
-        private PriorityType priority;
+        private CategoryType category;
 
 
         /// <summary>
@@ -36,12 +36,12 @@ namespace Assigment6
         }
 
         /// <summary>
-        /// Get and Set property for priority
+        /// Get and Set property for category
         /// </summary>
-        public PriorityType Priority 
+        public CategoryType Category
         {
-            get { return priority; } 
-            set { priority = value; }
+            get { return category; } 
+            set { category = value; }
         }
 
         /// <summary>
@@ -63,45 +63,45 @@ namespace Assigment6
         }
 
         /// <summary>
-        /// returns the string representation of the 'priority' field
+        /// returns the string representation of the 'category' field
         /// </summary>
-        /// <returns>priority.ToString();</returns>
+        /// <returns>category.ToString();</returns>
         private string GetPriorityString()
         {
-            return priority.ToString();
+            return category.ToString();
         }
 
         /// <summary>
-        /// This constructor initializes a new Task object with the default priority set to "Normal"
+        /// This constructor initializes a new Task object with the default category set to "Normal"
         /// </summary>
         public Task()
         {
-            //set a default priority typ
-            priority = PriorityType.Normal;
+            //set a default category typ
+            category = CategoryType.Revenue;
         }
 
         /// <summary>
         /// This constructor calls the full constructor, passing the provided 'taskDate',
-        /// an empty string for the description, and a default priority of "Normal"
+        /// an empty string for the description, and a default category of "Normal"
         /// </summary>
         /// <param name="taskDate"></param>
-        public Task(DateTime taskDate) : this(taskDate, string.Empty, PriorityType.Normal)
+        public Task(DateTime taskDate) : this(taskDate, string.Empty, CategoryType.Revenue)
         {
 
         }
 
         /// <summary>
-        /// Constructor that initializes a Task object with a specified task date, description, and priority
+        /// Constructor that initializes a Task object with a specified task date, description, and category
         /// This constructor allows full customization of a Task's properties when creating a new instance
         /// </summary>
         /// <param name="taskDate"></param>
         /// <param name="description"></param>
-        /// <param name="priority"></param>
-        public Task(DateTime taskDate, string description, PriorityType priority)
+        /// <param name="category"></param>
+        public Task(DateTime taskDate, string description, CategoryType category)
         {
             this.date = taskDate;
             this.description = description; 
-            this.priority = priority;
+            this.category = category;
         }
 
         /// <summary>

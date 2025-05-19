@@ -6,6 +6,8 @@ namespace Assigment6
 
         string fileName = Application.StartupPath + "\\Task.txt";
 
+        public record Category(string Name, CategoryType Type);
+
         public MainForm()
         {
             InitializeComponent();
@@ -15,6 +17,18 @@ namespace Assigment6
             taskManager = new TaskManager();
         }
 
+        
+
+        public void testCAtegory()
+        {
+            var rent = new Category("Rent", CategoryType.Expense);
+            var salary = new Category("Salary", CategoryType.Revenue);
+
+            MessageBox.Show(rent.Name);
+            
+        }
+
+
         private void InitializeGUI()
         {
             taskManager = new TaskManager();
@@ -22,14 +36,14 @@ namespace Assigment6
             // Clear the ListBox
             lstTask.Items.Clear();
 
-            // clear the priority box
-            cmbPriority.Items.Clear();
+            // clear the category box
+            cmbType.Items.Clear();
 
             // Fill the ComboBox
-            cmbPriority.Items.AddRange(Enum.GetNames(typeof(PriorityType)));
+            cmbType.Items.AddRange(Enum.GetNames(typeof(CategoryType)));
 
             //set Standard Value to ComboBox
-            cmbPriority.SelectedIndex = (int)PriorityType.Normal;
+            cmbType.SelectedIndex = (int)CategoryType.Revenue;
 
             //make sure listbox is empty
             txtToDo.Text = string.Empty;
@@ -50,7 +64,7 @@ namespace Assigment6
 
 
         /// <summary>
-        /// Read Input from user (Date and time, priority, description)
+        /// Read Input from user (Date and time, category, description)
         /// </summary>
         /// <returns>ReadInputTask</returns>
         private Task ReadInput()
@@ -65,13 +79,13 @@ namespace Assigment6
 
             ReadInputTask.DateAndTime = dateTimePicker.Value;
 
-            if (Enum.TryParse(cmbPriority.Text, out PriorityType priority))
+            if (Enum.TryParse(cmbType.Text, out CategoryType category))
             {
-                ReadInputTask.Priority = priority;
+                ReadInputTask.Category = category;
             }
             else
             {
-                MessageBox.Show("Pleas provide priority type", "Error");
+                MessageBox.Show("Pleas provide category type", "Error");
                 return null;
             }
 
