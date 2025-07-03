@@ -1,7 +1,14 @@
+using System.Text;
+using System.Xml;
+
 namespace Assigment6
 {
+    //Assignment 6 test
+
+    //record representing a category with a name and a type (Revenue or Expense)
     public record Category(string Name, CategoryType Type);
 
+    //record representing a transaction with date, amount, category, and description
     public record Transaction(
         DateTime Date,
         decimal Amount,
@@ -15,8 +22,6 @@ namespace Assigment6
 
         string fileName = Application.StartupPath + "\\Task.txt";
 
-       
-
         public MainForm()
         {
             InitializeComponent();
@@ -26,22 +31,84 @@ namespace Assigment6
             taskManager = new TaskManager();
         }
 
-        
-
-        public void testCAtegory()
+        /// <summary>
+        /// Populates the category list box with unique categories from TaskManager
+        /// </summary>
+        private void PopulateCategoryListBox()
         {
-            var rent = new Category("Rent", CategoryType.Expense);
-            var salary = new Category("Salary", CategoryType.Revenue);
+            var categories = taskManager.GetUniqueCategories();
 
-            MessageBox.Show(rent.Name);
-            
+            lstMonthEconomy.Items.Clear();
+            lstMonthEconomy.Items.AddRange(categories.ToArray());
+        }
+
+        /// <summary>
+        /// Displays transactions grouped by month, including totals and conditional labels based on checkboxes
+        /// </summary>
+        private void ShowGroupedTransactionsWith()
+        {
+            var grouped = taskManager.GetTransactionByMonth();
+
+            lstMonthEconomy.Items.Clear();
+
+            var orderedMonths = grouped.Keys.OrderBy(k => k).ToList();
+
+            for (int i = 0; i < orderedMonths.Count; i++)
+            {
+                var month = orderedMonths[i];
+                lstMonthEconomy.Items.Add($"--- {month:yyyy-MM} ---");
+
+                decimal totalRevenue = 0;
+                decimal totalExpense = 0;
+                decimal sum = 0;
+
+                
+                foreach (var tx in grouped[month])
+                {
+                    string item = $"{tx.Date:dd} - {tx.CategoryName} - {tx.Amount:C} - {tx.Description}";
+                    lstMonthEconomy.Items.Add(item);
+
+                    if (tx.CategoryType == CategoryType.Revenue)
+                        totalRevenue += tx.Amount;
+                    else if (tx.CategoryType == CategoryType.Expense)
+                        totalExpense += tx.Amount;
+
+                    sum = totalRevenue - totalExpense;
+                }
+
+                lstMonthEconomy.Items.Add($"  Total Revenue: {totalRevenue:C}");
+                lstMonthEconomy.Items.Add($"  Total Expense: {totalExpense:C}");
+
+                if (cbCampany.Checked && cbIndividual.Checked)
+                {
+                    MessageBox.Show($"Choose what you are using this as: Company or Individual in the right corner");
+                }
+                else if (cbIndividual.Checked)
+                {
+                    lstMonthEconomy.Items.Add($"Surplus/Deficit: {sum:C}");
+                }
+                else if (cbCampany.Checked)
+                {
+                    lstMonthEconomy.Items.Add($"Profit/Loss: {sum:C}");
+                }
+                else
+                {
+                    MessageBox.Show($"Choose what you are using this as: Company or Individual in the right corner");
+                }
+
+                if (i < orderedMonths.Count - 1)
+                {
+                    lstMonthEconomy.Items.Add("");
+                }
+            }
         }
 
 
+        /// <summary>
+        /// Initializes GUI elements with default values and clears lists and textboxes
+        /// </summary>
         private void InitializeGUI()
         {
-            taskManager = new TaskManager();
-
             lstEconomy.Items.Clear();
 
             cmbType.Items.Clear();
@@ -56,30 +123,43 @@ namespace Assigment6
             txtAmount.Text = string.Empty;
         }
 
+        // Updates the economy listbox with transaction info strings or message if none
         private void UpdateGUI()
         {
             lstEconomy.Items.Clear();
             string[] infoStrings = taskManager.GetInfoStringsList();
-            if (infoStrings != null)
+
+            if (infoStrings == null || infoStrings.Length == 0)
+            {
+                lstEconomy.Items.Add("No transactions found.");
+            }
+            else
             {
                 lstEconomy.Items.AddRange(infoStrings);
             }
         }
 
+        /// <summary>
+        /// Reads and validates input fields, then creates a Transaction object or shows error messages
+        /// </summary>
+        /// <returns></returns>
         private Transaction ReadInput()
         {
+            // Validate amount input
             if (!decimal.TryParse(txtAmount.Text.Trim(), out decimal amount) || amount < 0)
             {
                 MessageBox.Show("Please enter a valid (non-negative) amount.");
                 return null;
             }
 
+            // Validate date input (should not be minimum date)
             if (dateTimePicker.Value == DateTimePicker.MinimumDateTime)
             {
                 MessageBox.Show("Please select a valid date.");
                 return null;
             }
 
+            // Validate category name input
             string name = txtName.Text?.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -87,12 +167,14 @@ namespace Assigment6
                 return null;
             }
 
+            // Validate category type selection
             if (!Enum.TryParse(cmbType.Text, out CategoryType type))
             {
                 MessageBox.Show("Please select a valid category type.");
                 return null;
             }
 
+            // Validate description input
             if (string.IsNullOrWhiteSpace(txtToDo.Text))
             {
                 MessageBox.Show("Description cannot be empty.");
@@ -100,8 +182,8 @@ namespace Assigment6
             }
             string desc = txtToDo.Text.Trim();
 
+            // Create Category and Transaction objects
             var category = new Category(name, type);
-
             return new Transaction(dateTimePicker.Value, (decimal)amount, category, desc);
         }
 
@@ -140,6 +222,7 @@ namespace Assigment6
                 MessageBox.Show(errMessage);
             else
                 UpdateGUI();
+                ShowGroupedTransactionsWith();
         }
 
         private void newCtrlNToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,6 +242,7 @@ namespace Assigment6
             if (transaction != null && taskManager.AddNewTransaction(transaction))
             {
                 UpdateGUI();
+
             }
         }
 
@@ -168,6 +252,17 @@ namespace Assigment6
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowGroupedTransactionsWith();
+        }
+
+        private void lstMonthEconomy_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -35,6 +35,7 @@
             label3 = new Label();
             txtToDo = new TextBox();
             groupBox1 = new GroupBox();
+            label11 = new Label();
             label9 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -53,16 +54,26 @@
             label8 = new Label();
             label10 = new Label();
             txtAmount = new TextBox();
-            label11 = new Label();
+            btnGroupByMonth = new Button();
+            lstMonthEconomy = new ListBox();
+            groupBox2 = new GroupBox();
+            label15 = new Label();
+            label14 = new Label();
+            label13 = new Label();
+            label12 = new Label();
+            cbCampany = new CheckBox();
+            cbIndividual = new CheckBox();
+            label16 = new Label();
             groupBox1.SuspendLayout();
             menuMain.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(40, 86);
+            label1.Location = new Point(59, 86);
             label1.Name = "label1";
             label1.Size = new Size(90, 17);
             label1.TabIndex = 0;
@@ -132,6 +143,17 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Economy";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.Black;
+            label11.Location = new Point(480, 35);
+            label11.Name = "label11";
+            label11.Size = new Size(52, 15);
+            label11.TabIndex = 13;
+            label11.Text = "Amount";
             // 
             // label9
             // 
@@ -254,7 +276,7 @@
             // AddTask
             // 
             AddTask.BackColor = Color.LightGreen;
-            AddTask.Location = new Point(329, 222);
+            AddTask.Location = new Point(295, 222);
             AddTask.Name = "AddTask";
             AddTask.Size = new Size(75, 23);
             AddTask.TabIndex = 9;
@@ -296,16 +318,116 @@
             txtAmount.Size = new Size(215, 23);
             txtAmount.TabIndex = 13;
             // 
-            // label11
+            // btnGroupByMonth
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.Black;
-            label11.Location = new Point(480, 35);
-            label11.Name = "label11";
-            label11.Size = new Size(52, 15);
-            label11.TabIndex = 13;
-            label11.Text = "Amount";
+            btnGroupByMonth.BackColor = Color.LightGreen;
+            btnGroupByMonth.Location = new Point(431, 222);
+            btnGroupByMonth.Name = "btnGroupByMonth";
+            btnGroupByMonth.Size = new Size(145, 23);
+            btnGroupByMonth.TabIndex = 14;
+            btnGroupByMonth.Text = "Groupe by month";
+            btnGroupByMonth.UseVisualStyleBackColor = false;
+            btnGroupByMonth.Click += button1_Click;
+            // 
+            // lstMonthEconomy
+            // 
+            lstMonthEconomy.Font = new Font("Segoe UI Semilight", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lstMonthEconomy.FormattingEnabled = true;
+            lstMonthEconomy.ItemHeight = 13;
+            lstMonthEconomy.Location = new Point(62, 39);
+            lstMonthEconomy.Name = "lstMonthEconomy";
+            lstMonthEconomy.Size = new Size(266, 316);
+            lstMonthEconomy.TabIndex = 14;
+            lstMonthEconomy.SelectedIndexChanged += lstMonthEconomy_SelectedIndexChanged;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(label14);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(label12);
+            groupBox2.Controls.Add(lstMonthEconomy);
+            groupBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            groupBox2.Location = new Point(729, 47);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(355, 391);
+            groupBox2.TabIndex = 15;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Month Economy";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label15.ForeColor = Color.Black;
+            label15.Location = new Point(257, 21);
+            label15.Name = "label15";
+            label15.Size = new Size(71, 15);
+            label15.TabIndex = 14;
+            label15.Text = "Description";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.Black;
+            label14.Location = new Point(173, 21);
+            label14.Name = "label14";
+            label14.Size = new Size(52, 15);
+            label14.TabIndex = 14;
+            label14.Text = "Amount";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.Black;
+            label13.Location = new Point(109, 23);
+            label13.Name = "label13";
+            label13.Size = new Size(40, 15);
+            label13.TabIndex = 15;
+            label13.Text = "Name";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.Black;
+            label12.Location = new Point(62, 21);
+            label12.Name = "label12";
+            label12.Size = new Size(28, 15);
+            label12.TabIndex = 14;
+            label12.Text = "Day";
+            // 
+            // cbCampany
+            // 
+            cbCampany.AutoSize = true;
+            cbCampany.Location = new Point(173, 50);
+            cbCampany.Name = "cbCampany";
+            cbCampany.Size = new Size(78, 19);
+            cbCampany.TabIndex = 16;
+            cbCampany.Text = "Company";
+            cbCampany.UseVisualStyleBackColor = true;
+            // 
+            // cbIndividual
+            // 
+            cbIndividual.AutoSize = true;
+            cbIndividual.Location = new Point(269, 50);
+            cbIndividual.Name = "cbIndividual";
+            cbIndividual.Size = new Size(78, 19);
+            cbIndividual.TabIndex = 17;
+            cbIndividual.Text = "Individual";
+            cbIndividual.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.Location = new Point(-2, 49);
+            label16.Name = "label16";
+            label16.Size = new Size(151, 17);
+            label16.TabIndex = 18;
+            label16.Text = "Are you using this as an ";
             // 
             // MainForm
             // 
@@ -313,6 +435,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PaleTurquoise;
             ClientSize = new Size(1163, 612);
+            Controls.Add(label16);
+            Controls.Add(cbIndividual);
+            Controls.Add(cbCampany);
+            Controls.Add(groupBox2);
+            Controls.Add(btnGroupByMonth);
             Controls.Add(txtAmount);
             Controls.Add(label10);
             Controls.Add(txtName);
@@ -333,6 +460,8 @@
             groupBox1.PerformLayout();
             menuMain.ResumeLayout(false);
             menuMain.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -365,5 +494,15 @@
         private Label label10;
         private TextBox txtAmount;
         private Label label11;
+        private Button btnGroupByMonth;
+        private ListBox lstMonthEconomy;
+        private GroupBox groupBox2;
+        private Label label12;
+        private Label label15;
+        private Label label14;
+        private Label label13;
+        private CheckBox cbCampany;
+        private CheckBox cbIndividual;
+        private Label label16;
     }
 }
