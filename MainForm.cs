@@ -1,9 +1,34 @@
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Numerics;
 using System.Text;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Assigment6
 {
-    //Assignment 6 test
+    //Assignment 6 
+
+    //////////////////////////////////////////////////
+    // The main objectives of this assignment are //
+    ////////////////////////////////////////////////
+
+    //• To use records to define immutable data structures.
+    //• To use tuples to return multiple values from methods.
+    //• To practice working with collections (e.g., Lists, Dictionaries, and HashSets) to manage and organize data
+
+    //////////////////
+    // Description //
+    ////////////////
+
+    //Families and businesses often need to analyze or plan their monthly cash-flow to find a balance
+    //between incomes and expenses.In this assignment, you will build an application to track
+    //expenses and incomes (revenues) on a monthly basis.The system will help users (individuals
+    //or businesses) understand their financial situation by calculating the difference between
+    //incomes and expenses for each month.
+
+    //Solution:
 
     //record representing a category with a name and a type (Revenue or Expense)
     public record Category(string Name, CategoryType Type);
